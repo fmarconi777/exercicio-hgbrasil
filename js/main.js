@@ -1,44 +1,37 @@
 const url = 'https://api.hgbrasil.com/finance?format=json-cors&chave=492e400b'
 const cotacoes = {}
-const inputSeletor1 = document.querySelector('#moeda1')
-const inputSeletor2 = document.querySelector('#moeda2')
-let valor = document.getElementById('valor')
-let inserir = document.getElementById('inserir')
-let moedaAtual
-let moedaConversao
-
-window.addEventListener('load', function() {
-  getCotacoes()
-})
+const inputSeletor = document.querySelector('#moeda')
+const botao = document.querySelector('#botao')
+const valor = document.getElementById('valor')
+const inserir = document.getElementById('inserir')
+let moeda
+let valorInput
 
 async function getCotacoes() {
   const resposta = await (await fetch(url)).json()
   const currencies = resposta.results.currencies
   Object.values(currencies).forEach(objeto => (objeto.name ? cotacoes[objeto.name] = objeto.buy: false))
-  adicionaSelecao1()
-  adicionaSelecao2()
+  adicionaSelecao()
 }
 
-adicionaSelecao1.addEventListener('change', function() {
-  moedaAtual = this.selectIndex
+window.addEventListener('load', function() {
+  getCotacoes()
 })
 
-function adicionaSelecao1() {
-  const array = Object.keys(cotacoes)
-  for (chave in array) {
-    let option = document.createElement('option')
-    option.setAttribute('value', (+chave + 1))
-    option.textContent = array[chave]
-    inputSeletor1.appendChild(option)
-  }
-}
 
-function adicionaSelecao2() {
+botao.addEventListener('click', function() {
+  moeda = inputSeletor.value
+  valorInput = valor.value
+  const resposta = valorInput / cotacoes[moeda]
+  inserir.textContent = resposta
+})
+
+function adicionaSelecao() {
   const array = Object.keys(cotacoes)
   for (chave in array) {
     let option = document.createElement('option')
-    option.setAttribute('value', chave)
+    option.setAttribute('value', array[chave])
     option.textContent = array[chave]
-    inputSeletor2.appendChild(option)
+    inputSeletor.appendChild(option)
   }
 }
