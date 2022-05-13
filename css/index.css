@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 80vh;
+}
+
+form {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.seletor {
+  margin: 0px 15px;
+}
+
+.moeda {
+  margin: 30px 0px;
+}
+
+#valor-convertido {
+  display: flex;
+  align-items: center;
+  border: solid 1px rgb(209, 209, 208);
+  border-radius: 4px;
+  height: 38px;
+}
+
+#botao {
+  margin: 0px 15px;
+}
